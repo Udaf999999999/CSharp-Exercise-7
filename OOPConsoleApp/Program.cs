@@ -61,13 +61,15 @@ namespace OOPConsoleApp
             private string owner;
             private int length;
             private int count;
+            public int Value;
 
-            public Obj(string name, string ownerName, int objLength, int count)
+            public static Obj operator + (Obj adder1, Obj adder2)
             {
-                this.name = name;
-                owner = ownerName;
-                length = objLength;
-                this.count = count;
+                return new Obj { Value = adder1.Value + adder2.Value };
+            }
+            public static Obj operator - (Obj adder1, Obj adder2)
+            {
+                return new Obj { Value = adder1.Value - adder2.Value };
             }
         }
         class BaseClass
@@ -133,18 +135,40 @@ namespace OOPConsoleApp
         {
             public new void Display() => Console.WriteLine("E");
         }
-
+        class Vector
+        {
+            public int X;
+            public int Y;
+            public static Vector operator +(Vector a)
+            {
+                return new Vector
+                {
+                    X = a.X,
+                    Y = a.Y
+                };
+            }
+            public static Vector operator +(Vector a, (int X, int Y) b)
+            {
+                Console.WriteLine(typeof(B));
+                return new Vector
+                {
+                    X = a.X + b.X,
+                    Y = a.Y + b.Y
+                };
+            }
+        }
 
 
         static void Main(string[] args)
         {
-            D d = new D();
-            E e = new E();
+            Vector a = new Vector { X = 3, Y = 5 };
+            Vector b = new Vector { X = 7, Y = 13 };
 
-            d.Display();
-            ((A)e).Display();
-            ((B)d).Display();
-            ((A)d).Display();
+            Vector c = a + (3, 4);
+
+            var d = (3, 5);
+
+            Console.WriteLine($"{c.X}, {c.Y}");
             Console.WriteLine("Hello, World!");
         }
     }
