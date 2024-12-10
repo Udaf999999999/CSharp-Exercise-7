@@ -1,5 +1,9 @@
 ﻿namespace OOPConsoleApp
 {
+    public class Calculator
+    {
+        public int Sum(int a, int b) => a + b;
+    }
     internal class Program
     {
         class Employee
@@ -66,6 +70,10 @@
         class BaseClass
         {
             protected string Name;
+            public virtual void Display()
+            {
+                Console.WriteLine("Метод класса BaseClass");
+            }
 
             public BaseClass(string name)
             {
@@ -78,11 +86,11 @@
             public string Description;
 
             public int Counter;
-            public void Show()
-            {
-                Console.WriteLine("Ok");
-            }
 
+            public override void Display()
+            {
+                Console.WriteLine("Метод класса DerivedClass");
+            }
             public DerivedClass(string Desription, string name) : base(Desription)
             {
             }
@@ -90,10 +98,15 @@
             {
             }
         }
+        
+        
 
         static void Main(string[] args)
         {
-            DerivedClass
+            DerivedClass derivedClass = new DerivedClass("","",3);
+            BaseClass baseClass = new BaseClass("");
+            baseClass.Display();
+            derivedClass.Display();
             Console.WriteLine("Hello, World!");
         }
     }
