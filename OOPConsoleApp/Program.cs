@@ -1,4 +1,7 @@
-﻿namespace OOPConsoleApp
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading.Channels;
+
+namespace OOPConsoleApp
 {
     public class Calculator
     {
@@ -70,6 +73,7 @@
         class BaseClass
         {
             protected string Name;
+            public virtual int Counter { get; set; }
             public virtual void Display()
             {
                 Console.WriteLine("Метод класса BaseClass");
@@ -84,11 +88,22 @@
         class DerivedClass : BaseClass
         {
             public string Description;
-
-            public int Counter;
+            private int counter;
+            public override int Counter
+            {
+                get => counter;
+                set
+                {
+                    if (counter > 0)
+                    {
+                        counter = value;
+                    }
+                }
+            }
 
             public override void Display()
             {
+                base.Display();
                 Console.WriteLine("Метод класса DerivedClass");
             }
             public DerivedClass(string Desription, string name) : base(Desription)
@@ -98,15 +113,38 @@
             {
             }
         }
-        
-        
+        public class A
+        {
+            public virtual void Display() => Console.WriteLine("A");
+        }
+        public class B : A
+        {
+            public new void Display() => Console.WriteLine("B");
+        }
+        public class C : A
+        {
+            public override void Display() => Console.WriteLine("C");
+        }
+        public class D : B
+        {
+            public new void Display() => Console.WriteLine("D");
+        }
+        public class E : C
+        {
+            public new void Display() => Console.WriteLine("E");
+        }
+
+
 
         static void Main(string[] args)
         {
-            DerivedClass derivedClass = new DerivedClass("","",3);
-            BaseClass baseClass = new BaseClass("");
-            baseClass.Display();
-            derivedClass.Display();
+            D d = new D();
+            E e = new E();
+
+            d.Display();
+            ((A)e).Display();
+            ((B)d).Display();
+            ((A)d).Display();
             Console.WriteLine("Hello, World!");
         }
     }
