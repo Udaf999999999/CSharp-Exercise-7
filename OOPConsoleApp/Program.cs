@@ -57,12 +57,43 @@
 
             public Obj(string name, string ownerName, int objLength, int count)
             {
-                // ...
+                this.name = name;
+                owner = ownerName;
+                length = objLength;
+                this.count = count;
+            }
+        }
+        class BaseClass
+        {
+            protected string Name;
+
+            public BaseClass(string name)
+            {
+                Name = name;
+            }
+        }
+
+        class DerivedClass : BaseClass
+        {
+            public string Description;
+
+            public int Counter;
+            public void Show()
+            {
+                Console.WriteLine("Ok");
+            }
+
+            public DerivedClass(string Desription, string name) : base(Desription)
+            {
+            }
+            public DerivedClass(string Desription, string name, int counter) : this(Desription, name)
+            {
             }
         }
 
         static void Main(string[] args)
         {
+            DerivedClass
             Console.WriteLine("Hello, World!");
         }
     }
