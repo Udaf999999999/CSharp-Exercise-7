@@ -7,6 +7,62 @@ namespace OOPConsoleApp
     {
         public int Sum(int a, int b) => a + b;
     }
+    public class IndexingClass
+    {
+        public int[] array;
+
+        public IndexingClass(int[] array)
+        {
+            this.array = array;
+        }
+        public int this[int index]
+        {
+            get
+            {
+                if (index >= 0 && index < array.Length)
+                {
+                    return array[index];
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                if (index >= 0 && index < array.Length)
+                {
+                    array[index] = value;
+                }
+            }
+        }
+    }
+    public abstract class ComputerPart
+    {
+        public abstract void Work();
+
+    }
+    public class Processor : ComputerPart
+    {
+        public override void Work()
+        {
+
+        }
+    }
+    public class MotherBoard : ComputerPart
+    {
+        public override void Work()
+        {
+
+        }
+    }
+    public class GraphicCard : ComputerPart
+    {
+        public override void Work()
+        {
+
+        }
+    }
     internal class Program
     {
         class Employee
@@ -157,7 +213,7 @@ namespace OOPConsoleApp
                 };
             }
         }
-
+        
 
         static void Main(string[] args)
         {
